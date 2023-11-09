@@ -1,7 +1,7 @@
-import {differenceInMilliseconds} from 'date-fns';
-import React, {useEffect, useState} from 'react';
-import {Text, View} from 'react-native';
-import {BinaryTree, fibonacci} from './CalculationTools';
+import { differenceInMilliseconds } from 'date-fns';
+import React, { useEffect, useState } from 'react';
+import { Text, View } from 'react-native';
+import { BinaryTree, fibonacci } from './CalculationTools';
 
 const calculateTimes = 10000;
 
@@ -14,6 +14,7 @@ export default function CalculationBenchmark() {
   const [calculationTime6, setCalculationTime6] = useState<number>();
   const [calculationTime7, setCalculationTime7] = useState<number>();
   const [calculationTime8, setCalculationTime8] = useState<number>();
+
   useEffect(() => {
     loop((sum: number, i: number) => {
       return (sum += i);
@@ -32,7 +33,7 @@ export default function CalculationBenchmark() {
     let tree = generateTree(calculateTimes, setCalculationTime7);
     tree = searchTree(tree, 7624, setCalculationTime8);
     console.log(tree);
-  });
+  }, []);
 
   const calculate = (
     callback: (times: number) => void,
@@ -103,6 +104,9 @@ export default function CalculationBenchmark() {
         Divide {calculateTimes} times: {calculationTime4}
       </Text>
       <Text>Fib 50 times: {calculationTime5}</Text>
+      <Text>
+        Create instance of now {calculateTimes} nodes: {calculationTime6}
+      </Text>
       <Text>
         Create binary tree with {calculateTimes} nodes: {calculationTime7}
       </Text>
