@@ -10,7 +10,7 @@ export default function ComplexUIBenchMark() {
   useEffect(() => {
     const ms = end();
     setFirstFrameRenderTime(ms);
-  }, [end]);
+  }, []);
 
   return (
     <View>
@@ -34,10 +34,13 @@ export default function ComplexUIBenchMark() {
 const styles = StyleSheet.create({
   container: {
     height: 350,
+    position: 'relative',
   },
   layerBox: {
-    flex: 1,
-    borderRadius: 1000000,
+    width: 350,
+    height: 350,
+    borderRadius: 173,
+    position: 'absolute',
     shadowColor: '#ffeb3b',
     shadowOffset: {
       width: 1,

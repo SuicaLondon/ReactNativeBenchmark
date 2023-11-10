@@ -1,7 +1,7 @@
-import { differenceInMilliseconds } from 'date-fns';
-import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
-import { BinaryTree, fibonacci } from './CalculationTools';
+import {differenceInMilliseconds} from 'date-fns';
+import React, {useEffect, useState} from 'react';
+import {Text, View} from 'react-native';
+import {BinaryTree, fibonacci} from './CalculationTools';
 
 const calculateTimes = 10000;
 

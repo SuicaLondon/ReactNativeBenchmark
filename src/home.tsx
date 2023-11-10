@@ -12,6 +12,10 @@ export default function Home({navigation}: {navigation: any}) {
         title="Go to benchmark2"
         onPress={() => navigation.navigate('Benchmark2')}
       />
+      <Button
+        title="Go to benchmark3"
+        onPress={() => navigation.navigate('Benchmark3')}
+      />
     </View>
   );
 }
