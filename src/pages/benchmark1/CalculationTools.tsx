@@ -1,9 +1,13 @@
-export const fibonacci = (n: number): number => {
-  if (n === 0 || n === 1) {
-    return n;
+export function fibonacci(number: number) {
+  function recur(n: number, a: number, b: number) {
+    if (n > 0) {
+      return recur(n - 1, b, a + b);
+    } else {
+      return a;
+    }
   }
-  return fibonacci(n - 1) + fibonacci(n - 2);
-};
+  return recur(number, 0, 1);
+}
 
 class TreeNode {
   treeValue: number;

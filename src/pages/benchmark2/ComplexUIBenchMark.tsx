@@ -16,7 +16,7 @@ export default function ComplexUIBenchMark() {
     <View>
       <Text>First frame render time: {firstFrameRenderTime}</Text>
       <View style={styles.container}>
-        {Array.from(Array(10000).keys()).map(index => {
+        {Array.from(Array(1000).keys()).map(index => {
           return (
             <LinearGradient
               key={index}

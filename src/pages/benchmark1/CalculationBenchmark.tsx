@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {Text, View} from 'react-native';
 import {BinaryTree, fibonacci} from './CalculationTools';
 
-const calculateTimes = 10000;
+const calculateTimes = 100000;
 
 export default function CalculationBenchmark() {
   const [calculationTime1, setCalculationTime1] = useState<number>();
@@ -16,23 +16,43 @@ export default function CalculationBenchmark() {
   const [calculationTime8, setCalculationTime8] = useState<number>();
 
   useEffect(() => {
-    loop((sum: number, i: number) => {
-      return (sum += i);
-    }, setCalculationTime1);
-    loop((sum: number, i: number) => {
-      return (sum -= i);
-    }, setCalculationTime2);
-    loop((sum: number, i: number) => {
-      return (sum *= i);
-    }, setCalculationTime3);
-    loop((sum: number, i: number) => {
-      return (sum /= i);
-    }, setCalculationTime4);
-    calculate((num: number) => fibonacci(num), setCalculationTime5);
-    loop((_, _2) => new Date().getTime(), setCalculationTime6);
-    let tree = generateTree(calculateTimes, setCalculationTime7);
-    tree = searchTree(tree, 7624, setCalculationTime8);
-    console.log(tree);
+    try {
+      loop(
+        0,
+        (sum: number, i: number) => {
+          return (sum += i);
+        },
+        setCalculationTime1,
+      );
+      loop(
+        0,
+        (sum: number, i: number) => {
+          return (sum -= i);
+        },
+        setCalculationTime2,
+      );
+      loop(
+        1,
+        (sum: number, i: number) => {
+          return (sum *= i);
+        },
+        setCalculationTime3,
+      );
+      loop(
+        0,
+        (sum: number, i: number) => {
+          return (sum /= i);
+        },
+        setCalculationTime4,
+      );
+      calculate((num: number) => fibonacci(num), setCalculationTime5);
+      loop(0, (_, _2) => new Date().getTime(), setCalculationTime6);
+      let tree = generateTree(calculateTimes / 10, setCalculationTime7);
+      tree = searchTree(tree, 7624, setCalculationTime8);
+      console.log(tree);
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const calculate = (
@@ -40,19 +60,20 @@ export default function CalculationBenchmark() {
     setState: React.Dispatch<React.SetStateAction<number | undefined>>,
   ) => {
     const startTime = new Date();
-    callback(50);
+    callback(2000);
     const endTime = new Date();
     const ms = differenceInMilliseconds(endTime, startTime);
     setState(ms);
   };
 
   const loop = (
+    initSum: number,
     callback: (sum: number, index: number) => number,
     setState: React.Dispatch<React.SetStateAction<number | undefined>>,
   ) => {
     let sum = 0;
     const startTime = new Date();
-    for (let i = 0; i < calculateTimes; i++) {
+    for (let i = 1; i <= calculateTimes; i++) {
       sum = callback(sum, i);
     }
     const endTime = new Date();
@@ -103,12 +124,12 @@ export default function CalculationBenchmark() {
       <Text>
         Divide {calculateTimes} times: {calculationTime4}
       </Text>
-      <Text>Fib 50 times: {calculationTime5}</Text>
+      <Text>Fib 2000 times: {calculationTime5}</Text>
       <Text>
         Create instance of now {calculateTimes} nodes: {calculationTime6}
       </Text>
       <Text>
-        Create binary tree with {calculateTimes} nodes: {calculationTime7}
+        Create binary tree with {calculateTimes / 10} nodes: {calculationTime7}
       </Text>
       <Text>Search binary tree with at value 7624: {calculationTime8}</Text>
     </View>

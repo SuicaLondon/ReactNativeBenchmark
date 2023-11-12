@@ -24,6 +24,7 @@ export default function ComplexAnimationBenchMark() {
           const ratioY = Math.random();
           return (
             <AnimationContainer
+              key={index}
               left={windowWidth * ratioX}
               top={windowHeight * ratioY}
               type={
